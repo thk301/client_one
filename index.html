@@ -1,2 +1,12 @@
-<iframe src="https://script.google.com/macros/s/AKfycbwunz51Auhbb5TT3ooJqmheHQCxZyNQ2Nl3pGu27ERoRRKtrEpfGEEGvBO1ii16x8A/exec" 
-        width="100%" height="500px" frameborder="0"></iframe>
+const scriptUrl = "https://script.google.com/macros/s/AKfycbwunz51Auhbb5TT3ooJqmheHQCxZyNQ2Nl3pGu27ERoRRKtrEpfGEEGvBO1ii16x8A/exec";
+
+async function getSheetData() {
+    const response = await fetch(scriptUrl);
+    const data = await response.json();
+    console.log(data); // This shows your sheet data in the browser console
+    
+    // Example: Displaying the first row's "Name" column in a div
+    document.getElementById('display').innerText = data[0].Name; 
+}
+
+getSheetData();
