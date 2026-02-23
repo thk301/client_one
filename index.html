@@ -1,15 +1,23 @@
-<javascript>
-const scriptUrl = "https://script.google.com/macros/s/AKfycbwunz51Auhbb5TT3ooJqmheHQCxZyNQ2Nl3pGu27ERoRRKtrEpfGEEGvBO1ii16x8A/exec";
+<div id="display">Loading...</div>
 
+<script>
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbwunz51Auhbb5TT3ooJqmheHQCxZyNQ2Nl3pGu27ERoRRKtrEpfGEEGvBO1ii16x8A/exec";
 
-async function getSheetData() {
-    const response = await fetch(scriptUrl);
-    const data = await response.json();
-    console.log(data); // This shows your sheet data in the browser console
-    
-    // Example: Displaying the first row's "Name" column in a div
-    document.getElementById('display').innerText = data[0].Name; 
-}
+  async function getSheetData() {
+      try {
+          const response = await fetch(scriptUrl);
+          const data = await response.json();
+          console.log(data); 
+          
+          // Make sure "Name" matches your Google Sheet column header exactly!
+          if (data && data.length > 0) {
+              document.getElementById('display').innerText = data[0].Name; 
+          }
+      } catch (error) {
+          console.error("Error fetching data:", error);
+          document.getElementById('display').innerText = "Failed to load data.";
+      }
+  }
 
-getSheetData();
-</javascript>
+  getSheetData();
+</script>
